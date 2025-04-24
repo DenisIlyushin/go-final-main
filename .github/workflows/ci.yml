@@ -14,18 +14,19 @@ jobs:
   golang-linter:
     name: Linter
     runs-on: ubuntu-22.04
-    container: golang:1.22.4
+    container: golang:1.23.4
     steps:
       - uses: actions/checkout@v4
       - name: Run golangci-lint
         uses: golangci/golangci-lint-action@v4
         with:
           version: v1.59.1
+          skip-cache: tru
 
   test:
     name: Unit Tests
     runs-on: ubuntu-22.04
-    container: golang:1.22.4
+    container: golang:1.23.4
     steps:
       - uses: actions/checkout@v4
       - name: Run go vet
@@ -37,7 +38,7 @@ jobs:
     name: Coverage Report
     runs-on: ubuntu-22.04
     needs: [golang-linter, test]
-    container: golang:1.22.4
+    container: golang:1.23.4
     steps:
       - uses: actions/checkout@v4
         with:
